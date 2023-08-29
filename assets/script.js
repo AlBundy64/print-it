@@ -33,3 +33,14 @@ function slideNext(){
 function slidePrev(){
 	console.log("clic à gauche");
 }
+
+// On récupère le nombre de slides pour créer les bullet points
+for (let i = 0; i < slides.length; i++) {
+	const nbBulletPoint = document.createElement("div");
+	nbBulletPoint.classList.add("dot");
+	document.querySelector(".dots").appendChild(nbBulletPoint);
+}
+
+const allDots = document.querySelectorAll(".dot");
+    allDots[0].classList.add("dot_selected");
+
