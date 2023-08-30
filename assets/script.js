@@ -26,13 +26,39 @@ next.addEventListener("click", slideNext);
 prev.addEventListener("click", slidePrev);
 
 // Fonctions
+let numero = 0;
 function slideNext(){
 	console.log("clic à droite");
+	numero = numero + 1;
+	if (numero < 0)
+		numero = slides.length - 1;
+	if (numero > slides.length - 1)
+		numero = 0;
+	document.getElementById("slide").src = "./assets/images/slideshow/" + slides[numero]["image"];
+	document.getElementById("slider_text").innerHTML = slides[numero]["tagLine"];
+	allDots[numero].classList.add("dot_selected");
+	if (numero < slides.length && numero > 0)
+		allDots[numero-1].classList.remove("dot_selected")
+	else
+		allDots[slides.length - 1].classList.remove("dot_selected");
 }
 
 function slidePrev(){
 	console.log("clic à gauche");
+	numero = numero - 1;
+	if (numero < 0)
+		numero = slides.length - 1;
+	if (numero > slides.length - 1)
+		numero = 0;
+	document.getElementById("slide").src = "./assets/images/slideshow/" + slides[numero]["image"];
+	document.getElementById("slider_text").innerHTML = slides[numero]["tagLine"];
+	allDots[numero].classList.add("dot_selected");
+	if (numero < slides.length - 1)
+		allDots[numero+1].classList.remove("dot_selected");
+	if (numero == slides.length - 1)
+		allDots[0].classList.remove("dot_selected");	
 }
+
 
 // On récupère le nombre de slides pour créer les bullet points
 for (let i = 0; i < slides.length; i++) {
@@ -42,5 +68,7 @@ for (let i = 0; i < slides.length; i++) {
 }
 
 const allDots = document.querySelectorAll(".dot");
-    allDots[0].classList.add("dot_selected");
+    allDots[numero].classList.add("dot_selected");
+
+
 
